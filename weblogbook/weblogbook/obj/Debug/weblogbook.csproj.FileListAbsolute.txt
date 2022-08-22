@@ -77,3 +77,7 @@ D:\Study\32\SD\PROJECT\weblogbook\weblogbook\obj\Debug\weblogbook.csproj.CoreCom
 D:\Study\32\SD\PROJECT\weblogbook\weblogbook\obj\Debug\weblogbook.csproj.CopyComplete
 D:\Study\32\SD\PROJECT\weblogbook\weblogbook\obj\Debug\weblogbook.dll
 D:\Study\32\SD\PROJECT\weblogbook\weblogbook\obj\Debug\weblogbook.pdb
+D:\Study\32\SD\PROJECT\weblogbook\weblogbook\bin\EntityFramework.dll
+D:\Study\32\SD\PROJECT\weblogbook\weblogbook\bin\EntityFramework.SqlServer.dll
+D:\Study\32\SD\PROJECT\weblogbook\weblogbook\bin\EntityFramework.xml
+D:\Study\32\SD\PROJECT\weblogbook\weblogbook\bin\EntityFramework.SqlServer.xml
