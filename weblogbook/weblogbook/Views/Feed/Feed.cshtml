@@ -1,7 +1,47 @@
 ﻿
 @{
     ViewBag.Title = "Feed";
-}
+    if (Session["user"] != null)
+    {
 
-<h2>Feed, hi @ViewBag.user</h2>
 
+        //  Response.Redirect("~/Door/Index");
+
+
+
+
+
+        <h2>Feed, hi @Session["user"]</h2>
+
+        <div class="container-fluid d-flex" style="display:flex">
+
+            @{
+                weblogbook.Models.WeblogDBEntities1 db = new weblogbook.Models.WeblogDBEntities1();
+
+            }
+
+            <div class="row">
+                @foreach (var i in db.Articles)
+                {
+
+                    <div class="card " style="">
+
+                        <div class="card-body">
+                            <h6 class="card-title">@i.title</h6>
+                            <span class="card-subtitle text-muted">@i.writer</span>
+
+                            <p class="card-text">some text here from article</p>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">View</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            @i.createdAt
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+
+                    }
+                }

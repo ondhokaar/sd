@@ -18,6 +18,11 @@ namespace weblogbook
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Door", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapMvcAttributeRoutes();
+
+
         }
+
     }
 }

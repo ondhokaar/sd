@@ -8,9 +8,11 @@ namespace weblogbook.Views.Door
 {
     public class DoorController : Controller
     {
-        Models.WeblogDBEntities1 db = new Models.WeblogDBEntities1(); 
+        Models.WeblogDBEntities1 db = new Models.WeblogDBEntities1();
 
         // GET: Door
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Index()
         {
             return View();

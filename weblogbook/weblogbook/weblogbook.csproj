@@ -134,6 +134,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Article.cs">
+      <DependentUpon>WebDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FollowingMap.cs">
+      <DependentUpon>WebDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>WebDB.tt</DependentUpon>
     </Compile>

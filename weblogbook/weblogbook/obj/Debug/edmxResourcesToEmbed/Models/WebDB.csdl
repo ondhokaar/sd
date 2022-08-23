@@ -13,5 +13,25 @@
   </EntityType>
   <EntityContainer Name="WeblogDBEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Articles" EntityType="WeblogDBModel.Article" />
+    <EntitySet Name="FollowingMaps" EntityType="WeblogDBModel.FollowingMap" />
   </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="artID" />
+      <PropertyRef Name="writer" />
+    </Key>
+    <Property Name="artID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="writer" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="createdAt" Type="DateTime" Precision="3" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FollowingMap">
+    <Key>
+      <PropertyRef Name="fid" />
+    </Key>
+    <Property Name="fid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="followedby" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="following" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

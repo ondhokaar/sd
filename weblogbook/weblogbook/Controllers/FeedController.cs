@@ -9,6 +9,14 @@ namespace weblogbook.Controllers
     public class FeedController : Controller
     {
         Models.WeblogDBEntities1 db = new Models.WeblogDBEntities1();
+        public ActionResult Feed()
+        {
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/Door/Index");
+            }
+            return View();
+        }
         // GET: Feed
         [HttpPost]
         public ActionResult Feed([Bind(Include = "email, pass")] Models.User loginuser)
@@ -21,14 +29,15 @@ namespace weblogbook.Controllers
             if (ModelState.IsValid)
             {
                 userAuth = db.Users.Where(person => person.email == loginuser.email.ToLower()).FirstOrDefault();
-
+                
             }
 
             if (userAuth != null)
             {
                 if (userAuth.pass == loginuser.pass)
                 {
-                    ViewBag.user = loginuser.email;
+
+                    Session["user"] = userAuth.username;
                     ViewBag.info = "login success!";
                     return View();
                 }
@@ -45,5 +54,21 @@ namespace weblogbook.Controllers
 
             return RedirectToAction("Index", "Door");
         }
+
+
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetAllowResponseInBrowserHistory(false);
+            return RedirectToAction("Index", "Door");
+        }
+
     }
+
+
+
+
 }

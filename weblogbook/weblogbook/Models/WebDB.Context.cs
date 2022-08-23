@@ -26,5 +26,7 @@ namespace weblogbook.Models
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<FollowingMap> FollowingMaps { get; set; }
     }
 }

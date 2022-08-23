@@ -4,7 +4,25 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WeblogDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WeblogDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="artID" />
+            <PropertyRef Name="writer" />
+          </Key>
+          <Property Name="artID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="writer" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="FollowingMap">
+          <Key>
+            <PropertyRef Name="fid" />
+          </Key>
+          <Property Name="fid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="followedby" Type="varchar" MaxLength="255" />
+          <Property Name="following" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="email" />
@@ -16,11 +34,21 @@
           <Property Name="pass" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="totalposts" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Articles__writer__403A8C7D' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Articles__writer__403A8C7D" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Following__follo__36B12243' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Following__follo__36B12243" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Following__follo__37A5467C' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Following__follo__37A5467C" />-->
         <EntityContainer Name="WeblogDBModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FollowingMap" EntityType="Self.FollowingMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WeblogDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,7 +65,27 @@
         </EntityType>
         <EntityContainer Name="WeblogDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Articles" EntityType="WeblogDBModel.Article" />
+          <EntitySet Name="FollowingMaps" EntityType="WeblogDBModel.FollowingMap" />
         </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="artID" />
+            <PropertyRef Name="writer" />
+          </Key>
+          <Property Name="artID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="writer" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FollowingMap">
+          <Key>
+            <PropertyRef Name="fid" />
+          </Key>
+          <Property Name="fid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="followedby" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="following" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52,6 +100,25 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
                 <ScalarProperty Name="totalposts" ColumnName="totalposts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="WeblogDBModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="writer" ColumnName="writer" />
+                <ScalarProperty Name="artID" ColumnName="artID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FollowingMaps">
+            <EntityTypeMapping TypeName="WeblogDBModel.FollowingMap">
+              <MappingFragment StoreEntitySet="FollowingMap">
+                <ScalarProperty Name="following" ColumnName="following" />
+                <ScalarProperty Name="followedby" ColumnName="followedby" />
+                <ScalarProperty Name="fid" ColumnName="fid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
